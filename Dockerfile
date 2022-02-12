@@ -9,7 +9,7 @@ COPY . .
 # Install production dependencies and build a release artifact.
 RUN cargo build --release
 
-EXPOSE 8080
+EXPOSE 3030
 
 # Run the web service on container startup.
 ENTRYPOINT ["target/release/secretary"]
