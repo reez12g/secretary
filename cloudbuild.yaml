@@ -9,11 +9,13 @@ steps:
       - '-f'
       - Dockerfile
     id: Build
+    timeout: 1200s
   - name: gcr.io/cloud-builders/docker
     args:
       - push
       - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
     id: Push
+    timeout: 1200s
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
     args:
       - run
@@ -28,6 +30,7 @@ steps:
       - '--quiet'
     id: Deploy
     entrypoint: gcloud
+    timeout: 1200s
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
 options:
