@@ -6,7 +6,11 @@ async fn main() {
     let hello = warp::path!("hello" / String)
         .map(|name| format!("Hello, {}!", name));
 
+    let port = std::env::var("PORT")
+        .unwrap_or("8080".into())
+        .parse().unwrap();
+
     warp::serve(hello)
-        .run(([0, 0, 0, 0], 3030))
+        .run(([0, 0, 0, 0], port))
         .await;
 }
